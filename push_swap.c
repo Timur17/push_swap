@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/09/25 20:00:49 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/09/26 20:01:44 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@ int	ft_average(t_base *stc)
 	return(ft_help_av(len, tab));
 }
 
-void    ft_print(t_base *stc);
-
 void	ft_sort_3(t_base *stc)
 {
 	int first;
@@ -150,21 +148,32 @@ void	ft_sort_3(t_base *stc)
 	second = stc->a->next->value;
 	third = stc->a->next->next->value;
 	if( first > second && second < third && first < third)
+	{
 		exucute_sa(stc);
+		ft_putstr("sa\n");
+	}
 	else if( first > second && second > third && first > third)
 	{
 		exucute_sa(stc);
 		exucute_rra(stc);
+		ft_putstr("sa\nrra\n");
 	}
 	else if( first > second && second < third && first > third)
+	{
 		exucute_ra(stc);
+		ft_putstr("ra\n");
+	}
 	else if( first < second && second > third && first < third)
 	{
 		exucute_sa(stc);
 		exucute_ra(stc);
+		ft_putstr("sa\nra\n");
 	}
 	else if( first < second && second > third && first > third)
+	{
 		exucute_rra(stc);
+		ft_putstr("rra\n");
+	}
 
 }	
 
@@ -210,7 +219,10 @@ void    ft_sort_4(t_base *stc)
 	second = stc->a->next->value;
 
 	if (first > second)
+	{
 		exucute_ra(stc);
+		ft_putstr("ra\n");
+	}
 }
 
 void  ft_sort2(t_base *stc, int len)
@@ -225,58 +237,44 @@ void  ft_sort2(t_base *stc, int len)
 	{
 		copy = stc;
 		if (copy->a->value > av)
+		{
 			exucute_ra(copy);
+			ft_putstr("ra\n");
+		}
 		else
+		{
 			exucute_pb(copy);
+			ft_putstr("pb\n");
+		}
 	}
 }
 
 void	ft_sort_b(t_base *stc)
 {
-//	t_base *temp;
 	int i;
-//	temp = stc;
 
-//	printf("%d %d\n", temp->b->value, temp->a->value);
-//	while(temp->b)
-//	{
-//	temp = stc;
-	while(stc->b)
-	{
-		printf("value %d\n", stc->b->value);
 	i = 0;
-	while (stc->b->value < stc->a->value)
+	while (stc->b != NULL && stc->b->value < stc->a->value)
+	{
 		exucute_pa(stc);
-	printf("value %d\n", stc->b->value);
+		ft_putstr("pa\n");
+	}
+	if (stc->b != NULL && stc->b->value > stc->a->value)
+	{
 	while (stc->b->value > stc->a->value)
 	{
 		exucute_ra(stc);
+		ft_putstr("ra\n");
 		i++;
 	}
 	exucute_pa(stc);
+	ft_putstr("pa\n");
 	while (i-- > 0)
-		exucute_rra(stc);
-	printf("value %d\n", stc->b->value);
-	}
-//	printf("value %d\n", stc->b->value);
-/*	temp = stc;
-	while(stc->b)
 	{
-		i = 0;
-		temp = stc;
-		if(tmp->b->value < tmp->a->value)
-			exucute_pa(stc);
-		else
-			while(temp->b->value > temp->a->value)
-			{
-				printf("Test\n");
-				exucute_ra(temp);
-				i++;
-			}
-		printf("Test2\n");
-		while (i-- > 0)
-			exucute_rra(temp);
-	}*/
+		exucute_rra(stc);
+		ft_putstr("rra\n");
+	}
+	}
 }
 
 /*void	ft_sort_5(t_base *stc, int *tab, int i)
@@ -298,27 +296,22 @@ void	ft_sort_b(t_base *stc)
 
 void	ft_sort(t_base *stc)
 {
-//	int max = -1;
-//	int	min = -1;
 	int	len;
-	int *tab;
+//	int *tab;
 	int	i;
 	int	temp;
 
 	temp = 0;
 	i = -1;
 	len = ft_len(stc->a);
-	tab = (int *)malloc(sizeof(tab) * len/2);
-//	max = ft_max(stc->a);
-//	min = ft_min(stc->a);
+//	tab = (int *)malloc(sizeof(tab) * len/2);
 	while((len = ft_len(stc->a)) > 3)
 	{
 		ft_sort2(stc, len);
 		if(ft_len(stc->b) > 0)
 		{
-			printf("temp = %d len = %d\n", temp, ft_len(stc->b));
 			temp = ft_len(stc->b) - temp;
-			tab[++i] = temp;
+//			tab[++i] = temp;
 			temp = ft_len(stc->b);
 		}
 	}
@@ -326,14 +319,13 @@ void	ft_sort(t_base *stc)
 		ft_sort_3(stc);
 	else if (len == 2)
 		ft_sort_4(stc);
-	ft_sort_b(stc);
-//	ft_sort_5(stc, tab, i);
+	while(stc->b)
+		ft_sort_b(stc);
 //	while(i >= 0)
 //		printf("tab = %d\n", tab[i--]);
-//	ft_sort2(max, min, stc, len);
 }
 
-void	ft_print(t_base *base)
+/*void	ft_print(t_base *base)
 {
 	t_base *stc;
 
@@ -348,7 +340,7 @@ void	ft_print(t_base *base)
 		printf("value b = %d\n", stc->b->value);
 		stc->b = stc->b->next;
 	}
-}
+}*/
 
 int		main(int ac, char **av)
 {
@@ -357,13 +349,20 @@ int		main(int ac, char **av)
 	if(ac < 2)
 		return(0);
 	if (ft_valid1(av, ac) == 0)
-		ft_putstr("Error1\n");
+	{
+		ft_putstr("Error\n");
+		return(1);
+	}
 	stc.a = fill_stack(ac, av);
 	if (ft_valid2(stc.a) == 0)
-		ft_putstr("Error2\n");
-	ft_sort(&stc);
-	ft_print(&stc);
-	while (stc.a)
+	{
+		ft_putstr("Error\n");
+		return(1);
+	}
+	if (check_sort(&stc) == 0)
+		ft_sort(&stc);
+//	ft_print(&stc);
+/*	while (stc.a)
 	{
 		printf("value a = %d\n", stc.a->value);
 		stc.a = stc.a->next;
@@ -372,6 +371,6 @@ int		main(int ac, char **av)
 	{
 		printf("value b = %d\n", stc.b->value);
 		stc.b = stc.b->next;
-	}
+	}*/
 	ft_free(&stc);
 }

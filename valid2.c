@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/09/26 19:59:50 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:46:09 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ int		ft_valid1(char **av, int ac)
 	while (i < ac)
 	{
 		j = 0;
-		if ((ft_valid3(av[i]) == 0))
-			   return (0);	
 		while(av[i][j] != '\0')
 		{
-			if(av[i][j] == '-' && j == 0)
+			if(av[i][j] == '-') 
 				j++;
 			if(av[i][j] < '0' || av[i][j] > '9') 
 				  return(0);
@@ -91,27 +89,27 @@ int     ft_valid2(t_stack *a)
 
 int     ft_valid3(char *str)
 {
-	int i;
-	long	num;
-	int neg;
-
-	i = 0;
-	num = 0;
-	neg = 1;
-	if(str[i] == '-')
-	{
-		i++;
-		neg = neg * (-1);
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + (str[i] - 48);
-		i++;
-		if(num > 2147483647 && neg == 1)
-			return (0);
-		if(num > 2147483648 && neg == -1)
-			return (0);
-	}
-	return (1);
-}
-
+		  95     int i;
+		   96     long    num;
+		    97     int neg;
+			 98
+				  99     i = 0;
+			 100     num = 0;
+			 101     neg = 1;
+			 102     if(str[i] == '-')
+				 103     {
+					 104         i++;
+					 105         neg = neg * (-1);
+					 106     }
+			 107     printf("Test");
+			 108     while (str[i] >= '0' && str[i] <= '9')
+				 109     {
+					 110         num = num * 10 + (str[i] - 48);
+					 111         i++;
+					 112         if(num > 2147483647 && neg == 1)
+						 113             return (0);
+					 114         if(num < - 2147483648 && neg == -1)
+						 115             return (0);
+					 116     }
+			 117     return (1);
+			 118 }

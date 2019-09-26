@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/09/22 17:38:59 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:31:14 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int    exucute_rra(t_base *stc)
 	t_stack *help;
 	t_stack *copy;
 
+	if(stc->a == NULL)
+		return(1);
 	help = stc->a;
 	copy = help;
 	temp = help->value;
@@ -100,6 +102,8 @@ int    exucute_rrb(t_base *stc)
 	t_stack *help;
 	t_stack *copy;
 
+	if(stc->b == NULL)
+		return(1);
 	help = stc->b;
 	copy = help;
 	temp = help->value;

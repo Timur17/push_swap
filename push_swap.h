@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:45:52 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/09/18 19:48:16 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:01:40 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct      s_stacks
 
 int     ft_valid1(char **av, int ac);
 int     ft_valid2(t_stack *a);
+int     ft_valid3(char *str);
 t_stack             *fill_stack(int ac, char **av);
 void    ft_free(t_base *stc);
 int                 exucute_sa(t_base *stc);
@@ -50,6 +51,7 @@ int					ft_valid1(char **av, int ac);
 int					ft_valid2(t_stack *a);
 t_stack             *fill_stack(int ac, char **av);
 void				ft_free(t_base *stc);
+int     check_sort(t_base *stc);
 
 
 

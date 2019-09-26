@@ -6,34 +6,27 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/09/26 18:31:52 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:46:40 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack				*fill_stack(int ac, char **av)
+int		check_sort(t_base *stc)
 {
-	int		i;
-	t_stack *temp;
-	t_stack *test;
-	t_stack	*copy;
+	t_stack		*temp;
 
-	i = 1;
-	test = (t_stack *)malloc(sizeof(t_stack));
-	test->next = NULL;
-	temp = test;
-	while(ac > i)
+	if (stc->b != NULL)
+		return(0);
+	if (stc->a == NULL)
+		return(0);
+	temp = stc->a;
+	while(temp)
 	{
-		if (temp->next != NULL)
-			temp = temp->next;
-		temp->value = ft_atoi(av[i]);
-//		printf("value t %d\n", temp->value);
-		copy = (t_stack *)malloc(sizeof(t_stack));
-		temp->next = copy;
-		i++;
+		if(temp->next)
+			if(temp->value > temp->next->value)
+				return(0);
+		temp = temp->next;
 	}
-	free(copy);
-	temp->next = NULL;
-	return(test);
+	return(1);
 }
