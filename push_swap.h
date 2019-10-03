@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:45:52 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/09/26 19:01:40 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/03 22:27:08 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ typedef struct      s_stack
 {
 	int				value;
 	struct s_stack	*next;
+	int				rb;
+	int             rrb;
+	int             ra;
+	int             rra;
+	int				rr;
+	int				rrr;
 }               t_stack;
 typedef struct      s_stacks
 {
 	t_stack			*a;
 	t_stack			*b;
+	int				m;
 }					t_base;
 
 int     ft_valid1(char **av, int ac);

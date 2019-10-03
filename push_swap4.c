@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/03 22:44:08 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/03 20:26:39 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,9 +319,9 @@ void ft_add_rra(t_base *stc)
 	while(copy_b)
 	{
 		i = 1;
-		while(copy_a && copy_a->next)
+		while(copy_b->value > copy_a->value)
 		{
-			if(copy_b->value > copy_a->value && copy_b->value < copy_a->next->value)
+			if(copy_b->value < copy_a->next->value)
 				copy_b->rra = len - i++;
 			copy_a = copy_a->next;
 			i++;
@@ -329,8 +329,6 @@ void ft_add_rra(t_base *stc)
 		copy_a = stc->a;
 		copy_b = copy_b->next;
 	}
-	if (copy_b->rra == -1)
-		copy_b->rra = 0; 
 }
 
 void ft_add_ra(t_base *stc)
@@ -345,48 +343,20 @@ void ft_add_ra(t_base *stc)
 	while(copy_b)
 	{
 		i = 1;
-		while(copy_a && copy_a->next)
+		while(copy_b->value > copy_a->value)
 		{
-			printf("b = %d\n", copy_b->value);
-			printf("a = %d\n", copy_a->value);
-			printf("a_n = %d\n", copy_a->next->value);
-			if(copy_b->value > copy_a->value && copy_b->value < copy_a->next->value)
-			{
-				copy_b->ra = i;
-				break ;
-			}
+			if(copy_b->value < copy_a->next->value)
+				copy_b->ra = i++;
 			copy_a = copy_a->next;
 			i++;
-		}
-		if (copy_b->ra == -1)
-		{
-				copy_b->ra = 0;
-				printf("test%d\n", copy_b->ra);
 		}	
 		copy_a = stc->a;
 		copy_b = copy_b->next;
 	}
-//	ft_add_rra(stc);
+	ft_add_rra(stc);
 }
 
 void    ft_solution(t_base *stc);
-
-void ft_bzero_stc(t_stack *copy)
-{
-	t_stack *temp;
-
-	temp = copy;
-	while(temp)
-	{
-		temp->ra = -1;
-		temp->rb = -1;
-		temp->rra = -1;
-		temp->rrb = -1;
-		temp->rr = -1;
-		temp->rrr = -1;
-		temp = temp->next;
-	}
-}
 
 void  ft_sort3(t_base *stc, int max, int min, int av)
 {
@@ -395,15 +365,8 @@ void  ft_sort3(t_base *stc, int max, int min, int av)
 
 	copy_a = stc->a;
 	copy = stc->b;
-	int len = 3;
-	while (len-- > 0)
-	{
-		printf("-------------------------\n");
-	ft_bzero_stc(stc->b);
-	printf("test %d\n", stc->b->ra);
 	ft_add_rb(stc);
 	ft_add_ra(stc);
-	copy = stc->b;
 	while(copy)
 	{
 		printf("rb = %d\n", copy->rb);
@@ -428,43 +391,17 @@ void  ft_sort3(t_base *stc, int max, int min, int av)
 		copy = copy->next;
 	}
 	ft_solution(stc);
-	}
-}
-
-void ft_sol_rr(t_stack *copy, t_base *stc)
-{
-	int rr;
-
-	if(copy->ra > copy->rb)
-	{
-		rr = copy->rb;
-		copy->ra = copy->ra - rr;
-		copy->rb = copy->rb -rr;
-	}
-	else
-	{
-		rr = copy->ra;
-		copy->ra = copy->ra - rr;
-		copy->rb = copy->rb -rr;
-	}
-	while(rr-- > 0)
-	{
-		exucute_rr(stc);
-		ft_putstr("rr\n");
-	}
 }
 
 void	ft_solution(t_base *stc)
 {
 	int	min;
 	t_stack *copy;
-	int	rr;
 
 	copy = stc->b;
 	min = copy->ra + copy->rb; 
 	while(copy)
 	{
-		printf(" -------- %d %d", copy->ra, copy->rb);
 		if (min > copy->ra + copy->rb)
 			min = copy->ra + copy->rb;
 		copy = copy->next;
@@ -473,8 +410,6 @@ void	ft_solution(t_base *stc)
 	copy = stc->b;
 	while(copy->ra + copy->rb != min)
 		copy = copy->next;
-	if (copy->ra > 0 && copy->rb > 0)
-		ft_sol_rr(copy, stc);
 	while(copy->ra-- > 0)
 	{
 		exucute_ra(stc);

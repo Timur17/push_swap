@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/03 22:44:08 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/03 18:13:17 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,16 +227,19 @@ void    ft_sort_two(t_base *stc)
 	}
 }
 
-void  ft_sort2(t_base *stc, int max, int min, int av)
+void  ft_sort2(t_base *stc, int len)
 {
+	int av;
 	int	i;
 	t_base *copy;
 
 	i = 0;
-	copy = stc;
-	while(ft_len(copy->a) > 3)
+	av = ft_average(stc);
+	printf("av = %d\n", av);
+	while(len > i++)
 	{
-		if (copy->a->value == av || copy->a->value == min || copy->a->value == max)
+		copy = stc;
+		if (copy->a->value >= av)
 		{
 			exucute_ra(copy);
 			ft_putstr("ra\n");
@@ -249,261 +252,190 @@ void  ft_sort2(t_base *stc, int max, int min, int av)
 	}
 }
 
-void	ft_add_rrb(int len1, int len, t_base *stc)
+int ft_average_b(t_base *stc, int len, char c)
 {
-	int ll;
+	int *tab;
+	int i;
 	t_stack *copy;
 	
-	copy = stc->b;
-	ll = len1 + len;
-	while(len1-- > 0)
-	{
-		copy->rrb = ll--;
-		copy = copy->next;
-	}
-	while(copy)
-	{
-		copy->rrb = len--;
-		copy = copy->next;
-	}
-
-}
-
-void ft_add_rb(t_base *stc)
-{
-	t_stack *copy;
-	int	i;
-	int len1;
-	int len;
-
-	len = ft_len(stc->b);
-	if (len % 2 == 0)
-	{
-		len1 = len / 2;
-		len = len / 2;
-	}
+	if (c == 'a')
+		copy = stc->a;
 	else
-	{
-		len1 = (len / 2) + 1;
-		len = (len / 2);
-	}
-	printf("len1 = %d len2 = %d\n", len1, len); 
+		copy = stc->b;
+
 	i = 0;
-	copy = stc->b;
-	while(copy)
+	tab = ft_mas(copy, len);
+	while(len > i + 1)
 	{
-		copy->rb = i;
+		if(tab[i] > tab[i + 1])
+		{
+			ft_swap(tab, i);
+			if (i - 1 >= 0)
+				i--;
+			else
+				i = 0;
+		}
+		else
+			i++;
+	}
+	i = 0;
+/*	while(len > i)
+	{
+		printf("tab = %d\n", tab[i]);
 		i++;
-		copy = copy->next;
-	}
-	ft_add_rrb(len1, len, stc);
-	while(copy)
+	}*/
+	return(ft_help_av(len, tab));
+}
+
+void	ft_sort_b(t_base *stc, int *len)
+{
+	int		av;
+	t_base	*copy;
+	int		pa;
+	int		rb;
+
+	copy = stc;
+	pa = rb = 0;
+	av = ft_average_b(stc, *len, 'b');
+	while(*len > 0)
 	{
-//		printf("rb = %d\n", copy->rb);
-		printf("rrb = %d\n", copy->rrb);
-		copy = copy->next;
+		if(copy->b->value > av)
+		{
+			exucute_pa(copy);
+			ft_putstr("pa\n");
+			pa++;
+		}
+		else
+		{
+			exucute_rb(copy);
+			ft_putstr("rb\n");
+			rb++;
+		}
+		*len = *len - 1;
+	}
+	*len = rb;
+	while(rb-- > 0)
+	{
+		exucute_rrb(copy);
+		ft_putstr("rrb\n");
 	}
 }
 
-void ft_add_rra(t_base *stc)
+int    ft_sort_a(t_base *stc, int len)
 {
-	t_stack *copy_b;
-	t_stack *copy_a;
-	int i;
-	int len;
+	int     av;
+	t_base  *copy;
+	int     ra;
+	int     i;
 
-	i = 1;
-	len = ft_len(stc->a);
-	copy_b = stc->b;
-	copy_a = stc->a;
-	while(copy_b)
+	i = 0;
+	copy = stc;
+	ra = 0;
+	av = ft_average_b(stc, len, 'a');
+	while(len-- > 0)
 	{
-		i = 1;
-		while(copy_a && copy_a->next)
+		if(copy->a->value > av)
 		{
-			if(copy_b->value > copy_a->value && copy_b->value < copy_a->next->value)
-				copy_b->rra = len - i++;
-			copy_a = copy_a->next;
+			exucute_ra(copy);
+			ft_putstr("ra\n");
+			ra++;
 			i++;
 		}
-		copy_a = stc->a;
-		copy_b = copy_b->next;
-	}
-	if (copy_b->rra == -1)
-		copy_b->rra = 0; 
-}
-
-void ft_add_ra(t_base *stc)
-{
-	t_stack *copy_b;
-	t_stack *copy_a;
-	int i;
-
-	i = 1;
-	copy_b = stc->b;
-	copy_a = stc->a;
-	while(copy_b)
-	{
-		i = 1;
-		while(copy_a && copy_a->next)
+		else
 		{
-			printf("b = %d\n", copy_b->value);
-			printf("a = %d\n", copy_a->value);
-			printf("a_n = %d\n", copy_a->next->value);
-			if(copy_b->value > copy_a->value && copy_b->value < copy_a->next->value)
-			{
-				copy_b->ra = i;
-				break ;
-			}
-			copy_a = copy_a->next;
-			i++;
+			exucute_pb(copy);
+			ft_putstr("pb\n");
 		}
-		if (copy_b->ra == -1)
-		{
-				copy_b->ra = 0;
-				printf("test%d\n", copy_b->ra);
-		}	
-		copy_a = stc->a;
-		copy_b = copy_b->next;
 	}
-//	ft_add_rra(stc);
+	while(ra-- > 0)
+	{
+		exucute_rra(copy);
+		ft_putstr("rra\n");
+	}
+	return(i);
 }
 
-void    ft_solution(t_base *stc);
-
-void ft_bzero_stc(t_stack *copy)
+void	ft_sort_finish(t_base *stc, int *len)
 {
+	int i;
+	int l;
 	t_stack *temp;
 
-	temp = copy;
-	while(temp)
+	temp = stc->b;
+	i = *len;
+	l = 1;
+	while(i-- > 0)
 	{
-		temp->ra = -1;
-		temp->rb = -1;
-		temp->rra = -1;
-		temp->rrb = -1;
-		temp->rr = -1;
-		temp->rrr = -1;
+		temp->m = l++;
 		temp = temp->next;
 	}
+	i = *len;
+	temp = stc->b;
+	while(i-- > 0)
+	{
+		printf("%d\n", temp->m);
+		temp = temp->next;
+	}
+
 }
 
-void  ft_sort3(t_base *stc, int max, int min, int av)
+
+void    ft_sort_qb(t_base *stc, int *tab, int i)
 {
-	t_stack *copy;
-	t_stack *copy_a;
+	int *len;
+	int len_a;
+	int temp;
+	int main;
 
-	copy_a = stc->a;
-	copy = stc->b;
-	int len = 3;
-	while (len-- > 0)
-	{
-		printf("-------------------------\n");
-	ft_bzero_stc(stc->b);
-	printf("test %d\n", stc->b->ra);
-	ft_add_rb(stc);
-	ft_add_ra(stc);
-	copy = stc->b;
-	while(copy)
-	{
-		printf("rb = %d\n", copy->rb);
-		copy = copy->next;
-	}
-	copy = stc->b;
-	while(copy)
-	{
-		printf("rrb = %d\n", copy->rrb);
-		copy = copy->next;
-	}
-	copy = stc->b;
-	while(copy)
-	{
-		printf("ra = %d\n", copy->ra);
-		copy = copy->next;
-	}
-	copy = stc->b;
-	while(copy)
-	{
-		printf("rra = %d\n", copy->rra);
-		copy = copy->next;
-	}
-	ft_solution(stc);
-	}
-}
-
-void ft_sol_rr(t_stack *copy, t_base *stc)
-{
-	int rr;
-
-	if(copy->ra > copy->rb)
-	{
-		rr = copy->rb;
-		copy->ra = copy->ra - rr;
-		copy->rb = copy->rb -rr;
-	}
-	else
-	{
-		rr = copy->ra;
-		copy->ra = copy->ra - rr;
-		copy->rb = copy->rb -rr;
-	}
-	while(rr-- > 0)
-	{
-		exucute_rr(stc);
-		ft_putstr("rr\n");
-	}
-}
-
-void	ft_solution(t_base *stc)
-{
-	int	min;
-	t_stack *copy;
-	int	rr;
-
-	copy = stc->b;
-	min = copy->ra + copy->rb; 
-	while(copy)
-	{
-		printf(" -------- %d %d", copy->ra, copy->rb);
-		if (min > copy->ra + copy->rb)
-			min = copy->ra + copy->rb;
-		copy = copy->next;
-	}
-	printf("solut %d\n", min);
-	copy = stc->b;
-	while(copy->ra + copy->rb != min)
-		copy = copy->next;
-	if (copy->ra > 0 && copy->rb > 0)
-		ft_sol_rr(copy, stc);
-	while(copy->ra-- > 0)
-	{
-		exucute_ra(stc);
-		ft_putstr("ra\n");
-	}
-	while(copy->rb-- > 0)
-	{
-		exucute_rb(stc);
-		ft_putstr("rb\n");
-	}
-	exucute_pa(stc);
-	ft_putstr("pa\n");
-
+	temp = tab[0];
+	len = &tab[0];
+	main = tab[0];
+	while (*len >= 5)
+		ft_sort_b(stc, len);
+	len_a = temp - *len;
+	printf("len_a %d\n", len_a);
+	while(len_a > 5)
+		len_a = ft_sort_a(stc, len_a);
+	printf("len_a %d\n", len_a);
+	main = main - len_a;
+	len = &main;
+	ft_sort_finish(stc, len);
 }
 
 void	ft_sort(t_base *stc)
 {
 	int	len;
-	int	min;
-	int	max;
-	int av;
-	
-	max = ft_max(stc->a);
-	min = ft_min(stc->a);
-	av = ft_average(stc);
+	int *tab;
+	int	i;
+	int	temp;
+
+	temp = 0;
+	i = -1;
 	len = ft_len(stc->a);
-	ft_sort2(stc, max, min, av);
-	ft_sort_three(stc);
-	ft_sort3(stc, max, min, av);
+	tab = (int *)malloc(sizeof(tab) * len/2);
+	while((len = ft_len(stc->a)) > 3)
+	{
+		ft_sort2(stc, len);
+		if(ft_len(stc->b) > 0)
+		{
+			temp = ft_len(stc->b) - temp;
+			tab[++i] = temp;
+			temp = ft_len(stc->b);
+		}
+	}
+	if (len == 3)
+		ft_sort_three(stc);
+	else if (len == 2)
+		ft_sort_two(stc);
+	temp = 6;
+	tab[0] = 10;
+	if(stc->b)
+	ft_sort_qb(stc, tab, 0);
+//	int help = 6;
+//	ft_sort_b(stc, &help );
+//	temp = 0;
+//	while(i >= temp)
+//		printf("tab = %d\n", tab[temp++]);
 }
 
 void	ft_print(t_base *base)
@@ -540,9 +472,9 @@ int		main(int ac, char **av)
 		ft_putstr("Error\n");
 		return(1);
 	}
-	int len = 5;
 	if (check_sort(&stc) == 0)
 		ft_sort(&stc);
+//	ft_print(&stc);
 	while (stc.a)
 	{
 		printf("value a = %d\n", stc.a->value);

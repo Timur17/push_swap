@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/09/26 18:31:52 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/03 18:21:58 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_stack				*fill_stack(int ac, char **av)
 		if (temp->next != NULL)
 			temp = temp->next;
 		temp->value = ft_atoi(av[i]);
+//		temp->m = 0;
 //		printf("value t %d\n", temp->value);
 		copy = (t_stack *)malloc(sizeof(t_stack));
 		temp->next = copy;
