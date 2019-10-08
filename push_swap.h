@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:45:52 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/03 22:27:08 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/08 15:22:14 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct      s_stack
 	int             rra;
 	int				rr;
 	int				rrr;
+	int				max_r;
+	int				max_rr;
 }               t_stack;
 typedef struct      s_stacks
 {
@@ -36,11 +38,11 @@ typedef struct      s_stacks
 	int				m;
 }					t_base;
 
-int     ft_valid1(char **av, int ac);
-int     ft_valid2(t_stack *a);
-int     ft_valid3(char *str);
+int					ft_valid1(char **av, int ac);
+int					ft_valid2(t_stack *a);
+int					ft_valid3(char *str);
 t_stack             *fill_stack(int ac, char **av);
-void    ft_free(t_base *stc);
+void				ft_free(t_base *stc);
 int                 exucute_sa(t_base *stc);
 int					exucute_rb(t_base *stc);
 int					exucute_ra(t_base *stc);
@@ -58,14 +60,19 @@ int					ft_valid1(char **av, int ac);
 int					ft_valid2(t_stack *a);
 t_stack             *fill_stack(int ac, char **av);
 void				ft_free(t_base *stc);
-int     check_sort(t_base *stc);
-
-
-
-
-
-
-
+int					check_sort(t_base *stc);
+void				ft_sort_less_5(t_base *stc, int av);
+int					ft_len(t_stack  *a);
+void				ft_sort_three(t_base *stc);
+int					ft_min(t_stack *a);
+void				ft_sort4(t_base *stc, int min, int len);
+int					ft_max(t_stack *a);
+int					*ft_mas(t_stack  *a, int len);
+void				ft_swap(int *tab, int i);
+void				ft_sort4(t_base *stc, int min, int len);
+void				ft_sort_two(t_base *stc);
+int					ft_help_av(int len, int *tab);
+int					ft_average(t_base *stc);
 
 
 
