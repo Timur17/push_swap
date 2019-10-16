@@ -6,46 +6,36 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/16 13:56:00 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/15 13:13:28 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_help(char *line, t_base *stc)
+void					ft_print(t_base *stc)
 {
-	if (check_valid(line, stc) == 0)
-	{
-		ft_putstr("Error\n");
-		return (0);
-	}
-	return (1);
-}
+	t_stack				*copy_a;
+	t_stack				*copy_b;
+	char				n;
 
-int		main(int ac, char **av)
-{
-	t_base		stc;
-	char		*line;
-
-	if (ac < 2)
-		return (0);
-	if (ft_valid1(av, ac) == 0)
+	copy_a = stc->a;
+	copy_b = stc->b;
+	n = '\n';
+	ft_putstr("STACK A   STACK B");
+	ft_putchar(n);
+	while (copy_a || copy_b)
 	{
-		ft_putstr("Error\n");
-		return (0);
+		if (copy_a)
+		{
+			ft_putnbr(copy_a->value);
+			copy_a = copy_a->next;
+		}
+		ft_putstr("           ");
+		if (copy_b)
+		{
+			ft_putnbr(copy_b->value);
+			copy_b = copy_b->next;
+		}
+		ft_putchar(n);
 	}
-	stc.a = fill_stack(ac, av, &stc);
-	if (ft_valid2(stc.a) == 0)
-	{
-		ft_putstr("Error\n");
-		return (0);
-	}
-	while (get_next_line(0, &line) > 0)
-	{
-		if (ft_help(line, &stc) == 0)
-			return (0);
-		free(line);
-	}
-	check_sort(&stc) != 0 ? ft_putstr("OK\n") : ft_putstr("KO\n");
-	ft_free(&stc);
 }

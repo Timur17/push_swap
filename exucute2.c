@@ -6,46 +6,30 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/16 13:56:00 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/15 14:28:40 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_help(char *line, t_base *stc)
+void			exucute_sa_rra(t_base *stc)
 {
-	if (check_valid(line, stc) == 0)
-	{
-		ft_putstr("Error\n");
-		return (0);
-	}
-	return (1);
+	exucute_sa(stc);
+	ft_putstr("sa\n");
+	exucute_rra(stc);
+	ft_putstr("rra\n");
 }
 
-int		main(int ac, char **av)
+void			exucute_sa_ra(t_base *stc)
 {
-	t_base		stc;
-	char		*line;
+	exucute_sa(stc);
+	ft_putstr("sa\n");
+	exucute_ra(stc);
+	ft_putstr("ra\n");
+}
 
-	if (ac < 2)
-		return (0);
-	if (ft_valid1(av, ac) == 0)
-	{
-		ft_putstr("Error\n");
-		return (0);
-	}
-	stc.a = fill_stack(ac, av, &stc);
-	if (ft_valid2(stc.a) == 0)
-	{
-		ft_putstr("Error\n");
-		return (0);
-	}
-	while (get_next_line(0, &line) > 0)
-	{
-		if (ft_help(line, &stc) == 0)
-			return (0);
-		free(line);
-	}
-	check_sort(&stc) != 0 ? ft_putstr("OK\n") : ft_putstr("KO\n");
-	ft_free(&stc);
+void			exucute_sa_print(t_base *stc)
+{
+	exucute_sa(stc);
+	ft_putstr("sa\n");
 }
