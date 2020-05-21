@@ -17,7 +17,7 @@ xwq
 |rrb	|rotates stuck B down by one
 |rrr	|rotates both A and B down by one
 
-Также есть ограничение в передвежение чисел внутри стеках и между стеками:
+Также есть ограничение в передвежение чисел внутри самих стеках и между ними:
 
 - no more than 2-3 operations for 3 integers
 - no more than 12 operations for 5 integers
