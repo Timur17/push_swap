@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/16 13:41:30 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/16 15:34:04 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int						main(int ac, char **av)
 		return (1);
 	}
 	stc.a = fill_stack(ac, av, &stc);
-	stc.b = NULL;
 	if (ft_valid2(stc.a) == 0)
 	{
 		ft_putstr("Error\n");

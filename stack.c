@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 16:09:43 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/15 15:06:09 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/16 15:36:19 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ t_stack				*fill_stack(int ac, char **av, t_base *stc)
 	}
 	free(copy);
 	temp->next = NULL;
+	stc->b = NULL;
 	return (test);
 }

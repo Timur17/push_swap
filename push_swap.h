@@ -6,7 +6,7 @@
 /*   By: wtorwold <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 19:45:52 by wtorwold          #+#    #+#             */
-/*   Updated: 2019/10/16 13:32:23 by wtorwold         ###   ########.fr       */
+/*   Updated: 2019/10/16 15:47:45 by wtorwold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft/libft.h"
 # include "get_next_line.h"
 # include <stdlib.h>
-# include <stdio.h>
 
 typedef struct		s_stack
 {
