@@ -25,4 +25,4 @@
 - no more than 700 operations for 100 integers
 - no more than 5300 operations for 500 integers
 
-Подробнее в файле Subject
+Подробнее в файле [Subject](https://github.com/Timur17/push_swap/blob/master/subject_push_swap.en.pdf)
