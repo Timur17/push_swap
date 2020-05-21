@@ -19,8 +19,7 @@ xwq
 
 Также есть ограничение в передвежение чисел внутри стеках и между стеками:
 
-|----:|
-|no more than 2-3 operations for 3 integers
-|no more than 12 operations for 5 integers
-|no more than 700 operations for 100 integers
-|no more than 5300 operations for 500 integers
+- no more than 2-3 operations for 3 integers
+- no more than 12 operations for 5 integers
+- no more than 700 operations for 100 integers
+- no more than 5300 operations for 500 integers
