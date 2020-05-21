@@ -2,27 +2,27 @@
 
 Проект школы 21 для изучения алгоритмов сортировки. Я использовал в своем коде сортировку вставками
 
-Программа должна использование 2 стека для сортировки целочисленного массива с помощью определенных команд:
+Программа должна использовать 2 стека (А и В) для сортировки целочисленного массива с помощью определенных команд:
 
 |instructions	|Description
 |----:|:----:|
-|sa	|swap first two elements of stack A
-|sb	|swap first two elements of stack B
-|ss	|sa and sb at the same time
-|pa	|pops the first elememt on B and puts it on top of A
-|pb	|pops the first elememt on A and puts it on top of B
-|ra	|rotates stuck A up by one
-|rb	|rotates stuck B up by one
-|rr	|rotates both A and B up by one
-|rra	|rotates stuck A down by one
-|rrb	|rotates stuck B down by one
-|rrr	|rotates both A and B down by one
+|sa	| поменять первые два элемента в стеке А
+|sb	| поменять первые два элемента в стек В 
+|ss	| sa и sb  одновременно 
+|pa	| первый элемент в стеке В перенести в вверх стека А 
+|pb	| первый элемент в стеке А перенести в вверх стека В 
+|ra	| все элементы в стеке А сдвинуть на один вверх, первый становится последним
+|rb	| все элементы в стеке В сдвинуть на один вверх, первый становится последним 
+|rr	| ra и rb одновременно 
+|rra| все элементы в стеке А перенести перенести на одни в низ, последний становится первым 
+|rrb| все элементы в стеке B перенести перенести на одни в низ, последний становится первым 
+|rrr| rra и rrb одновременно 
 
 Также есть ограничение в передвежение чисел внутри самих стеках и между ними:
 
-- no more than 2-3 operations for 3 integers
-- no more than 12 operations for 5 integers
-- no more than 700 operations for 100 integers
-- no more than 5300 operations for 500 integers
+- для 3 цифр не более 2-3 операции no more than 2-3 operations for 3 integers
+- для 5 цифр не более 12
+- для 100 цифр не более 700 операций
+- для 500 цифр не более 5300 операций
 
 Подробнее в файле [Subject](https://github.com/Timur17/push_swap/blob/master/subject_push_swap.en.pdf)
